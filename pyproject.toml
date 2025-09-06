@@ -1,0 +1,35 @@
+[project]
+name = "langchain-resume"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    # LangChain core + community integrations
+    "langchain",
+    "langchain-community",
+
+    # Gemini (Google Generative AI)
+    "langchain-google-genai",
+    "google-generativeai",
+
+    # Supabase client
+    "supabase",
+
+    # For vector search embeddings (works with SupabaseVectorStore)
+    "langchain-openai",
+
+    # Resume parsing (optional, pick one or both depending on file formats)
+    "pymupdf",         # good for PDFs
+    "unstructured",    # handles PDFs, Word, images, etc.
+
+    # Environment variable management
+    "python-dotenv",
+    "psycopg2-binary",
+    "supabase",
+    "pypdf2",
+    "pypdf",
+    "fastapi",
+    "pydantic",
+    "uvicorn",
+]
