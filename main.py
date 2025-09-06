@@ -66,11 +66,12 @@ You can also compare resumes and extract relevant information from them.
 
 Rules:
 1. Only use SELECT statements. Do not INSERT, UPDATE, DELETE, or DROP.
-2. Return plain SQL without Markdown backticks or any code block markers.
-3. Return only the minimal query needed.
+2. Execute the SELECT queries on the connected database and return the results in JSON format.
+3. Only use the exact job_title values present in the table.
 4. If the request can't be done with SELECT, explain politely.
 5. Keep queries safe and efficient.
-6. Only use the exact job_title values present in the table.
+6. Use GetResumeText only when fetching resume content from Supabase.
+7. Return plain SQL without Markdown backticks or any code block markers.
 """
 
 MAX_MESSAGES = 5  # sliding windows
