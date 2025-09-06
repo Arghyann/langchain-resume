@@ -32,4 +32,5 @@ dependencies = [
     "fastapi",
     "pydantic",
     "uvicorn",
+    "python-jose",
 ]
