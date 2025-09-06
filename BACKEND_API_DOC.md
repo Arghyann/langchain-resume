@@ -25,20 +25,38 @@ This backend provides a FastAPI-based API for interacting with a Supabase/Postgr
 
 ---
 
+## Authentication (OAuth2 + Supabase)
+
+All endpoints require authentication. Only three whitelisted users can access the API. Authentication is handled via OAuth2 Bearer tokens, validated against Supabase.
+
+**Allowed users:**
+
+- aryanmane2016@gmail.com
+- seconduser@gmail.com
+- thirduser@gmail.com
+
+You must obtain a Supabase access token (e.g., via frontend login or Supabase dashboard) and include it in the `Authorization: Bearer <token>` header for all requests.
+
+If you are not one of the allowed users, you will receive a 403 error.
+
+---
+
 ## API Endpoints (FastAPI)
 
 ### Health Check
 
-- **GET /**
-- Returns: `{ "status": "ok" }`
+- **GET /** (requires authentication)
+- Returns: `{ "status": "ok", "user": { ... } }`
 
 ### Query Endpoint
 
-- **POST /query**
+- **POST /query** (requires authentication)
 - **Body:**
   ```json
   { "query": "your question here" }
   ```
+- **Headers:**
+  - `Authorization: Bearer <your_supabase_token>`
 - **Response:**
   ```json
   { "result": "agent's answer or SQL results" }

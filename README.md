@@ -29,6 +29,9 @@ Create a `.env` file in the project root with:
 ```
 READ_ONLY_DB_URL=your_postgres_connection_string
 GOOGLE_API_KEY=your_gemini_api_key
+SUPABASE_URL=your_supabase_url
+SUPABASE_SERVICE_ROLE_KEY=your_supabase_service_role_key
+SECRET_KEY=your_secret_key_for_jwt
 ```
 
 ### 3. Start the backend
@@ -44,15 +47,32 @@ GOOGLE_API_KEY=your_gemini_api_key
 
 The API will be available at `http://localhost:8000`.
 
+## Authentication (OAuth2 + Supabase)
+
+All endpoints require authentication. Only three whitelisted users can access the API. Authentication is handled via OAuth2 Bearer tokens, validated against Supabase.
+
+**Allowed users:**
+
+- aryanmane2016@gmail.com
+- seconduser@gmail.com
+- thirduser@gmail.com
+
+You must obtain a Supabase access token (e.g., via frontend login or Supabase dashboard) and include it in the `Authorization: Bearer <token>` header for all requests.
+
+If you are not one of the allowed users, you will receive a 403 error.
+
 ## API Endpoints
 
-- `GET /` — Health check
-- `POST /query` — Main endpoint for natural language queries. Send `{ "query": "your question" }` as JSON.
+- `GET /` — Health check (requires authentication)
+- `POST /query` — Main endpoint for natural language queries. Send `{ "query": "your question" }` as JSON (requires authentication)
 
-## Example Query
+## Example Query (with Auth)
 
-```json
+```http
 POST /query
+Authorization: Bearer <your_supabase_token>
+Content-Type: application/json
+
 {
   "query": "Show all interns with salary expectations less than 10000"
 }
